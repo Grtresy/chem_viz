@@ -9,8 +9,15 @@ body { margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, 
 /* 主布局 */
 .main-container { display: flex; flex: 1; overflow: hidden; }
 
+/* 汉堡菜单按钮（默认隐藏） */
+.menu-toggle { display: none; border: none; background: none; color: white; font-size: 24px; cursor: pointer; padding: 0; line-height: 1; }
+.top-bar-left { display: flex; align-items: center; gap: 10px; }
+
 /* 左侧边栏 */
-.sidebar { width: 250px; background-color: #f4f4f4; border-right: 1px solid #ddd; overflow-y: auto; padding: 10px; }
+.sidebar { width: 250px; background-color: #f4f4f4; border-right: 1px solid #ddd; overflow-y: auto; padding: 10px; transition: transform 0.3s ease; }
+
+/* 遮罩层 */
+.overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.3); z-index: 999; }
 .sidebar h3 { font-size: 16px; color: #555; border-bottom: 2px solid #ddd; padding-bottom: 5px; }
 
 /* 目录树样式 */
@@ -23,3 +30,35 @@ body { margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, 
 /* 右侧绘图区 */
 .content { flex: 1; padding: 10px; display: flex; flex-direction: column; overflow-y: auto; background-color: white;}
 .plot-container { width: 100%; height: 50vh; margin-bottom: 20px; border: 1px solid #eee; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
+
+/* 手机端响应式 */
+@media (max-width: 768px) {
+    .menu-toggle { display: block; }
+
+    .top-bar {
+        flex-wrap: wrap;
+        height: auto;
+    }
+    .top-bar h2 { font-size: 16px; }
+    .top-bar .controls { width: 100%; margin-top: 5px; }
+
+    .main-container { flex-direction: column; }
+
+    .sidebar {
+        position: fixed;
+        left: 0;
+        top: 50px;
+        width: 250px;
+        height: calc(100vh - 50px);
+        z-index: 1000;
+        transform: translateX(-100%);
+        border-right: 1px solid #ddd;
+    }
+    .sidebar.open {
+        transform: translateX(0);
+    }
+
+    .content { width: 100%; }
+
+    .plot-container { height: 40vh; }
+}

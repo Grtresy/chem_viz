@@ -5,6 +5,32 @@ const REGION_COLORS = { 1: '#E699A7', 2: '#FEDD9E', 3: '#A6D9C0', 4: '#71A7D2' }
 const REGION_LABELS = { 1: '气相区 (Gas)', 2: '液相区 (Liquid)', 3: '相变区 (Phase Change)', 4: '临界区 (Critical)' };
 
 document.addEventListener('DOMContentLoaded', async () => {
+    // 手机端侧边栏切换
+    const menuToggle = document.getElementById('menu-toggle');
+    const sidebar = document.querySelector('.sidebar');
+    const overlay = document.createElement('div');
+    overlay.className = 'overlay';
+    document.body.appendChild(overlay);
+
+    function closeSidebar() {
+        sidebar.classList.remove('open');
+        overlay.style.display = 'none';
+    }
+
+    menuToggle.addEventListener('click', () => {
+        const isOpen = sidebar.classList.toggle('open');
+        overlay.style.display = isOpen ? 'block' : 'none';
+    });
+
+    overlay.addEventListener('click', closeSidebar);
+
+    // 点击分子后自动收起侧边栏（手机端体验）
+    document.getElementById('file-tree').addEventListener('click', (e) => {
+        if (e.target.classList.contains('file-item')) {
+            closeSidebar();
+        }
+    });
+
     // 1. 只加载菜单，速度极快
     try {
         const response = await fetch('menu.json');
