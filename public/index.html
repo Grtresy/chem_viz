@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>分子热力学性质可视化</title>
+    <script src="https://cdn.plot.ly/plotly-2.27.0.min.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="top-bar">
+        <h2>分子性质可视化平台</h2>
+        <div class="controls">
+            <span>当前显示属性: </span>
+            <select id="metric-select">
+                <option value="Z">压缩因子 (Z)</option>
+                <option value="Phi">逸度系数 (Phi)</option>
+                <option value="H">摩尔焓 H (J/mol)</option>
+                <option value="S">摩尔熵 S (J/mol/K)</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="main-container">
+        <div class="sidebar">
+            <h3>分子列表</h3>
+            <div id="file-tree">
+                </div>
+        </div>
+
+        <div class="content">
+            <h3 id="current-title">请在左侧选择一个分子</h3>
+            
+            <div id="plot-3d" class="plot-container"></div>
+            
+            <div id="plot-2d" class="plot-container"></div>
+        </div>
+    </div>
+
+    <script src="client.js"></script>
+</body>
+</html>

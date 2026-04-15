@@ -1,0 +1,7 @@
+node_modules/
+raw_data/
+data20260414.zip
+__pycache__/
+*.pyc
+.venv/
+.DS_Store
